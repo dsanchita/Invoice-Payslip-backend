@@ -6,10 +6,11 @@ import {
   updateInvoice,
   deleteInvoice,
   deleteMultipleInvoices
-} from '../controllers/invoice.controller.js';
+} from '../controller/invoice.controller.js';
+
 const router = express.Router();
 
-// Create a new invoice
+// Create a new invoice - keep the route as '/create'
 router.post('/create', createInvoice);
 
 // Get all invoices with pagination and search
@@ -21,8 +22,8 @@ router.get('/get/:id', getInvoice);
 // Update invoice
 router.put('/put/:id', updateInvoice);
 
-// Delete single invoice
-router.delete('/detele/:id', deleteInvoice);
+// Delete single invoice (fix the typo here)
+router.delete('/delete/:id', deleteInvoice);
 
 // Delete multiple invoices
 router.delete('/deleteall', deleteMultipleInvoices);

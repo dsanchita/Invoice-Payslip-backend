@@ -13,6 +13,7 @@ export const createInvoice = async (req, res) => {
       invoiceData.referenceDate = new Date(invoiceData.referenceDate);
     }
 
+    // Create the invoice - this will trigger the pre-save hook to generate invoiceNo
     const invoice = new Invoice(invoiceData);
     await invoice.save();
     

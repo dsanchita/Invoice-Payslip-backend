@@ -19,7 +19,7 @@ const addressSchema = new mongoose.Schema({
 });
 
 const invoiceSchema = new mongoose.Schema({
-  invoiceNo: { type: String, unique: true, required: true },
+  invoiceNo: { type: String, unique: true }, // Changed to unique: true
   poreferencevalue: { type: String },
   invoiceDate: { type: Date, required: true },
   dueDate: { type: Date, required: true },
@@ -45,7 +45,7 @@ const invoiceSchema = new mongoose.Schema({
 });
 
 invoiceSchema.pre('save', async function(next) {
-  if (!this.isNew) {
+  if (!this.isNew || this.invoiceNo) {
     return next();
   }
   
@@ -54,18 +54,24 @@ invoiceSchema.pre('save', async function(next) {
     const year = date.getFullYear().toString().slice(2);
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
+    const datePrefix = `INV-${year}${month}${day}`;
     
-    const lastInvoice = await this.constructor.findOne({}, {}, { sort: { 'createdAt': -1 } });
+    // Find the highest invoice number with the same date prefix
+    const lastInvoice = await this.constructor.findOne(
+      { invoiceNo: new RegExp(`^${datePrefix}`) },
+      {},
+      { sort: { invoiceNo: -1 } }
+    );
+    
     let sequence = 1;
-    
-    if (lastInvoice && lastInvoice.invoiceNo) {
-      const lastSequence = parseInt(lastInvoice.invoiceNo.split('-')[3]);
+    if (lastInvoice) {
+      const lastSequence = parseInt(lastInvoice.invoiceNo.split('-')[2]);
       if (!isNaN(lastSequence)) {
         sequence = lastSequence + 1;
       }
     }
     
-    this.invoiceNo = `INV-${year}${month}${day}-${sequence.toString().padStart(3, '0')}`;
+    this.invoiceNo = `${datePrefix}-${sequence.toString().padStart(3, '0')}`;
     next();
   } catch (err) {
     next(err);
