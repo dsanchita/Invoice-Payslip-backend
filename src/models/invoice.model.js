@@ -19,7 +19,7 @@ const addressSchema = new mongoose.Schema({
 });
 
 const invoiceSchema = new mongoose.Schema({
-  invoiceNo: { type: String, unique: true }, // Changed to unique: true
+  invoiceNo: { type: String, unique: true }, 
   poreferencevalue: { type: String },
   invoiceDate: { type: Date, required: true },
   dueDate: { type: Date, required: true },
