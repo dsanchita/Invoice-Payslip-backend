@@ -309,7 +309,7 @@ const prepareInvoiceData = (invoice) => {
   });
 
   // Fill empty rows with null to remove them from the template
-  for (let i = invoice.items.length; i < 8; i++) {
+  for (let i = invoice.items.length; i < 4; i++) {
     const itemNum = i + 1;
     data[`SL${itemNum}`] = null;
     data[`Description${itemNum}`] = null;
