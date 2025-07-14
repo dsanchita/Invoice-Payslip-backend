@@ -274,8 +274,7 @@ const prepareInvoiceData = (invoice) => {
     AmountDue: invoice.amountDue.toFixed(2),
     PaymentMode: invoice.paymentMode,
     TotalTaxableValue: invoice.totalTaxableValue.toFixed(2),
-    ValueInFigure: invoice.
-    valueInWords.toFixed(2),
+    ValueInFigure: invoice.amountDue.toFixed(2),
     CGST: invoice.totalCGSTAmount.toFixed(2),
     SGST: invoice.totalSGSTAmount.toFixed(2),
     IGST: invoice.totalIGSTAmount.toFixed(2),
