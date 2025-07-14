@@ -1,0 +1,71 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run cros",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/cros/bin/cros.js",
+            "cwd": "${workspaceFolder}/node_modules/cros",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run cros",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/cros/bin/cros.js",
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run cros",
+            "runtimeExecutable": "cros",
+            "cwd": "${workspaceFolder}/node_modules/cros",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run cros",
+            "runtimeExecutable": "cros",
+            "cwd": "${workspaceFolder}",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node: Attach",
+            "processId": "${command:Pick Process}",
+            "restart": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node: Debug",
+            "program": "${workspaceFolder}/server.js",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node: Start",
+            "program": "${workspaceFolder}/server.js"
+        },
+        {
+            "type": "dockerfile",
+            "request": "launch",
+            "name": "Docker: Build",
+            "dockerfile": "Dockerfile",
+            "contextPath": "${workspaceFolder}"
+        }
+    ]
+}
