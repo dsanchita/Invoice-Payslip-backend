@@ -17,9 +17,9 @@ import mammoth from 'mammoth';
 import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
 
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = path.join(__dirname, '../Templates');
-const libreConvert = promisify(libre.convert);
 
 // Helper function to format date
 const formatDate = (date) => {
@@ -274,7 +274,7 @@ const prepareInvoiceData = (invoice) => {
     AmountDue: invoice.amountDue.toFixed(2),
     PaymentMode: invoice.paymentMode,
     TotalTaxableValue: invoice.totalTaxableValue.toFixed(2),
-    ValueInFigure: invoice.amountDue.toFixed(2),
+    ValueInFigure: invoice.valueInWords,
     CGST: invoice.totalCGSTAmount.toFixed(2),
     SGST: invoice.totalSGSTAmount.toFixed(2),
     IGST: invoice.totalIGSTAmount.toFixed(2),
@@ -325,7 +325,7 @@ const prepareInvoiceData = (invoice) => {
   return data;
 };
 
-// Generate Word document using the template
+// Generate Word document using the template// Generate Word document using the template
 const generateWordDocument = async (invoice) => {
   try {
     // Determine which template to use based on withSignature flag
@@ -353,12 +353,9 @@ const generateWordDocument = async (invoice) => {
     // Prepare the data for template replacement
     const templateData = prepareInvoiceData(invoice);
     
-    // Set the template data
-    doc.setData(templateData);
-    
     try {
-      // Render the document
-      doc.render();
+      // Render the document with data (new API)
+      doc.render(templateData);
     } catch (error) {
       console.error('Error rendering document:', error);
       throw error;
@@ -383,8 +380,16 @@ const generatePdfDocument = async (invoice) => {
     // First generate the Word document
     const wordBuffer = await generateWordDocument(invoice);
     
-    // Convert Word to PDF using LibreOffice
-    const pdfBuffer = await libreConvert(wordBuffer, '.pdf', undefined);
+    // Convert Word to PDF using LibreOffice with proper callback handling
+    const pdfBuffer = await new Promise((resolve, reject) => {
+      libre.convert(wordBuffer, '.pdf', undefined, (err, done) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(done);
+        }
+      });
+    });
     
     return pdfBuffer;
   } catch (error) {
@@ -392,7 +397,6 @@ const generatePdfDocument = async (invoice) => {
     throw error;
   }
 };
-
 // Download Word document
 export const downloadWordInvoice = async (req, res) => {
   try {
