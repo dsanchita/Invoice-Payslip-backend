@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './src/config/db.js';
 import invoiceRoutes from './src/routes/invoice.route.js';
 import purchaseOrderRoutes from './src/routes/purchaseorder.route.js';
+import clientRoutes from './src/routes/clientDatabase.Route.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -38,6 +39,9 @@ app.get('/', (req, res) => {
 app.use('/api/invoices', invoiceRoutes);
 // Use purchase order routes
 app.use('/api/purchaseorders', purchaseOrderRoutes);
+
+// Use client database routes
+app.use('/api/clients', clientRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
