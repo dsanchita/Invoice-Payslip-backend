@@ -15,7 +15,7 @@ COPY . .
 RUN mkdir -p /usr/src/app/templates
 
 # Copy templates
-COPY Templates/* src/Templates
+COPY src/Templates/ /usr/src/app/templates/
 
 # Expose port
 EXPOSE 5000
