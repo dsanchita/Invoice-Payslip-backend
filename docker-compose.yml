@@ -7,7 +7,7 @@ services:
       - "5000:5000"
     environment:
       - NODE_ENV=production
-      - MONGO_URI=mongodb://mongo:27017/invoice-app
+      - MONGO_URI=mongodb+srv://sanchita:6i4KcJ3r2GhulPno@cluster0.ubre5.mongodb.net/invoicedb?retryWrites=true&w=majority
     depends_on:
       - mongo
     volumes:
