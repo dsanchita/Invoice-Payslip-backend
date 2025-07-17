@@ -5,6 +5,8 @@ services:
     build: .
     ports:
       - "5001:5002"  
+    env_file:
+      - .env 
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb+srv://sanchita:6i4KcJ3r2GhulPno@cluster0.ubre5.mongodb.net/invoicedb?retryWrites=true&w=majority
@@ -14,9 +16,9 @@ services:
     # depends_on:
     #   - mongo
     volumes:
-    - ./.env:/usr/app/.env
       - ./templates:/usr/src/app/templates
       - ./invoice-files:/usr/src/app/invoice-files
+      - ./.env:/usr/app/.env 
 
   # Remove local mongo service since you're using MongoDB Atlas
   # mongo:
