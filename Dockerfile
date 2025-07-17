@@ -19,7 +19,7 @@ RUN mkdir -p /usr/src/app/templates && \
     mkdir -p /usr/src/app/invoice-files
 
 # Expose port
-EXPOSE 5000
+EXPOSE 5001
 
 # Run the app
 CMD ["npm", "start"]

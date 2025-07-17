@@ -4,7 +4,7 @@ services:
   backend:
     build: .
     ports:
-      - "5002:5002"  # Fixed port mapping to match your app
+      - "5001:5002"  
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb+srv://sanchita:6i4KcJ3r2GhulPno@cluster0.ubre5.mongodb.net/invoicedb?retryWrites=true&w=majority
