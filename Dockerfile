@@ -4,14 +4,16 @@ FROM node:16-alpine
 # Create app directory
 WORKDIR /usr/src/app
 
-# Install dependencies (include all needed packages)
+# Copy package files first (for better caching)
 COPY package*.json ./
-RUN npm install --production
+
+# Install dependencies (use --production if needed)
+RUN npm install
 
 # Bundle app source
 COPY . .
 
-# Create directories if they don't exist
+# Create required directories
 RUN mkdir -p /usr/src/app/templates && \
     mkdir -p /usr/src/app/invoice-files
 
