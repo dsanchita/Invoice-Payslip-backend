@@ -13,6 +13,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.7.1",
   "dependencies": {
+    "mongoose": "^8.0.0",
     "cros": "^1.1.0",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
