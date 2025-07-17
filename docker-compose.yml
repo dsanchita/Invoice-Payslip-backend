@@ -18,8 +18,7 @@ services:
     volumes:
       - ./templates:/usr/src/app/templates
       - ./invoice-files:/usr/src/app/invoice-files
-      - ./.env:/usr/app/.env 
-
+    
   # Remove local mongo service since you're using MongoDB Atlas
   # mongo:
   #   image: mongo:5.0
