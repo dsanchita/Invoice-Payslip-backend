@@ -4,18 +4,16 @@ FROM node:16-alpine
 # Create app directory
 WORKDIR /usr/src/app
 
-# Install dependencies
+# Install dependencies (include all needed packages)
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
 # Bundle app source
 COPY . .
 
-# Create directory for templates
-RUN mkdir -p /usr/src/app/templates
-
-# Copy templates
-COPY src/Templates/ /usr/src/app/templates/
+# Create directories if they don't exist
+RUN mkdir -p /usr/src/app/templates && \
+    mkdir -p /usr/src/app/invoice-files
 
 # Expose port
 EXPOSE 5000
