@@ -4,7 +4,7 @@ services:
   backend:
     build: .
     ports:
-      - "5000:5000"
+      - "5001:5000"
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb+srv://sanchita:6i4KcJ3r2GhulPno@cluster0.ubre5.mongodb.net/invoicedb?retryWrites=true&w=majority
