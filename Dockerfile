@@ -12,6 +12,7 @@ RUN npm install
 
 # Copy all files including .env
 COPY . .
+COPY .env .
 
 # Create required directories
 RUN mkdir -p /usr/src/app/templates && \

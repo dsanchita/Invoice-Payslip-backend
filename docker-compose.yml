@@ -4,22 +4,26 @@ services:
   backend:
     build: .
     ports:
-      - "5001:5000"
+      - "5002:5002"  # Fixed port mapping to match your app
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb+srv://sanchita:6i4KcJ3r2GhulPno@cluster0.ubre5.mongodb.net/invoicedb?retryWrites=true&w=majority
-    depends_on:
-      - mongo
+      - PORT=5002
+      - FRONTEND_URL=http://localhost:5173
+    # Remove dependency on local mongo since you're using Atlas
+    # depends_on:
+    #   - mongo
     volumes:
       - ./templates:/usr/src/app/templates
       - ./invoice-files:/usr/src/app/invoice-files
 
-  mongo:
-    image: mongo:5.0
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+  # Remove local mongo service since you're using MongoDB Atlas
+  # mongo:
+  #   image: mongo:5.0
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo-data:/data/db
 
-volumes:
-  mongo-data:
+# volumes:
+#   mongo-data:
