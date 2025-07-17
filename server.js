@@ -7,7 +7,20 @@ import purchaseOrderRoutes from './src/routes/purchaseorder.route.js';
 import clientRoutes from './src/routes/clientDatabase.Route.js';
 
 // Load environment variables from .env file
-dotenv.config();
+const dotenvResult = dotenv.config();
+
+// Debug environment variable loading
+console.log('Dotenv config result:', dotenvResult);
+console.log('Current working directory:', process.cwd());
+console.log('__dirname equivalent:', import.meta.url);
+
+// Check if environment variables are loaded
+console.log('\n=== Environment Variables Debug ===');
+console.log('MONGO_URI:', process.env.MONGO_URI ? 'DEFINED' : 'UNDEFINED');
+console.log('MONGO_URI length:', process.env.MONGO_URI?.length || 0);
+console.log('PORT:', process.env.PORT || 'UNDEFINED');
+console.log('FRONTEND_URL:', process.env.FRONTEND_URL || 'UNDEFINED');
+console.log('=====================================\n');
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -24,7 +37,7 @@ app.use(cors({
 // Connect to MongoDB
 connectDB()
   .then(() => {
-    console.log('MongoDB connected');
+    console.log('MongoDB connected successfully');
   })
   .catch((error) => {
     console.log(`Failed to connect to MongoDB: ${error.message}`);
