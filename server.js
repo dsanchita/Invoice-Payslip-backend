@@ -19,7 +19,6 @@ console.log('\n=== Environment Variables Debug ===');
 console.log('MONGO_URI:', process.env.MONGO_URI ? 'DEFINED' : 'UNDEFINED');
 console.log('MONGO_URI length:', process.env.MONGO_URI?.length || 0);
 console.log('PORT:', process.env.PORT || 'UNDEFINED');
-console.log('FRONTEND_URL:', process.env.FRONTEND_URL || 'UNDEFINED');
 console.log('=====================================\n');
 
 const app = express();
