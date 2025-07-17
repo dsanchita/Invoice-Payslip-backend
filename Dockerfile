@@ -10,7 +10,7 @@ COPY package*.json ./
 # Install dependencies (use --production if needed)
 RUN npm install
 
-# Bundle app source
+# Copy all files including .env
 COPY . .
 
 # Create required directories
